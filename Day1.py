@@ -1,17 +1,66 @@
+
+
 def counter(file):
+    spelledValues = {"one": "1",
+                     "two": "2",
+                     "three": "3",
+                     "four": "4",
+                     "five": "5",
+                     "six": "6",
+                     "seven": "7",
+                     "eight": "8",
+                     "nine": "9"}
     totalValue = 0
-    lineValues =[]
+    numberstring = ""
+    lineValues = []
     with open(file) as f:
         for line in f:
             for char in line:
-                if(char.isnumeric):
+                if char.isnumeric():
                     lineValues.append(char)
+                else:
+                    numberstring += char.lower()
+                    if numberstring in spelledValues:
+                        justTheNumber = ""
+                        numberstring = numberstring[::-1]
+                        for letter in numberstring:
+                            justTheNumber += letter
+                            justTheNumber = justTheNumber[::-1] 
+                            if justTheNumber in spelledValues:     
+                                lineValues.append(spelledValues.get(justTheNumber))
+                                numberstring = ""
+                                justTheNumber = ""
+                            justTheNumber = justTheNumber[::-1] 
             lineValuesLength = len(lineValues)
-            totalValue += int(lineValues[0])
+            totalValue += int(lineValues[0]) * 10
             totalValue += int(lineValues[lineValuesLength - 1])
-            lineValues = []
+            lineValues.clear()
+            numberstring = ""
     return totalValue
 
 
-print(counter("Day1Data"))
-print(20)
+# print(counter("Day1Data"))
+print(counter("Test"))
+
+
+
+#     file = open('Day1Data', 'r')
+#     count = 0
+#     lines = file.readlines()
+#     for line in lines:
+#         index1 = None
+#         index2 = None
+#         for i in range(len(line)):
+#             if line[i].isdigit():
+#                 index1 = i
+#                 break
+#         for y in range(len(line) - 1, -1, -1):
+#             if line[y].isdigit():
+#                 index2 = y
+#                 break
+#         premier_nombre = int(line[index1])
+#         dernier_nombre = int(line[index2])
+#         count += (premier_nombre * 10) + dernier_nombre
+#         file.close()
+
+# print(counter)
