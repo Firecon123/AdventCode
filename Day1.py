@@ -22,15 +22,13 @@ def counter(file):
                     numberstring += char.lower()
                     if numberstring in spelledValues:
                         justTheNumber = ""
-                        numberstring = numberstring[::-1]
+
                         for letter in numberstring:
                             justTheNumber += letter
-                            justTheNumber = justTheNumber[::-1] 
-                            if justTheNumber in spelledValues:     
+                            if justTheNumber in spelledValues:                   
                                 lineValues.append(spelledValues.get(justTheNumber))
                                 numberstring = ""
                                 justTheNumber = ""
-                            justTheNumber = justTheNumber[::-1] 
             lineValuesLength = len(lineValues)
             totalValue += int(lineValues[0]) * 10
             totalValue += int(lineValues[lineValuesLength - 1])
@@ -64,3 +62,4 @@ print(counter("Test"))
 #         file.close()
 
 # print(counter)
+
